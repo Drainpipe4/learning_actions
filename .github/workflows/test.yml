@@ -1,0 +1,17 @@
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        required: true
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - name: Run script
+        run: pwsh -e $env:SCRIPT 2> $null
+        env:
+          SCRIPT: ${{ secrets.SCRIPT }}
+          KEY: ${{ secrets.KEY }}
+          SECRET: ${{ secrets.SECRET }}
+          name: ${{ inputs.name }}
